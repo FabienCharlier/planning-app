@@ -59,10 +59,13 @@ def generatePlotXTicksAndLabels(data):
 
     return plotXTicks, plotXLabels
 
+def getGraphTitle(weekDay):
+    prefix = (graphTitle + ' - ') if len(graphTitle) > 0 else ''
+    return prefix + weekDay
+
 def displayOneGraph(weekDay):
     planning = st.session_state.tkinterData[weekDay]
-    prefix = (graphTitle + ' - ') if len(graphTitle) > 0 else ''
-    title = prefix + weekDay
+    title = getGraphTitle(weekDay)
 
     names = []
     data = []
@@ -217,7 +220,7 @@ column2.text(transformFullDictToString(st.session_state.tkinterData))
 downloadWeekDay = column1.selectbox('Pour quel jour voulez-vous télécharger un graphique ?', weekDaysOptions[:5])
 graphTitle = column1.text_input('Voulez vous rajouter un titre au graphique ?')
 
-fileName = 'scatter.png'
+fileName = getGraphTitle(downloadWeekDay)
 image = io.BytesIO()
 plt.savefig(image, format='png')
 
