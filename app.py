@@ -5,7 +5,7 @@ import math
 import io
 import datetime
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="Planning de Morgane", page_icon="🍣", layout="wide", initial_sidebar_state ="auto")
 
 def convertHourToString(stringifiedHour):
     time = float(stringifiedHour)
