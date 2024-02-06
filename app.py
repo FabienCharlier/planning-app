@@ -220,6 +220,8 @@ column2.text(transformFullDictToString(st.session_state.tkinterData))
 downloadWeekDay = column1.selectbox('Pour quel jour voulez-vous télécharger un graphique ?', weekDaysOptions[:5])
 graphTitle = column1.text_input('Voulez vous rajouter un titre au graphique ?')
 
+column1.pyplot(displayOneGraph(downloadWeekDay))
+
 fileName = getGraphTitle(downloadWeekDay)
 image = io.BytesIO()
 plt.savefig(image, format='png')
@@ -231,6 +233,3 @@ btn = column1.download_button(
    mime="image/png",
    type="primary"
 )
-
-
-column1.pyplot(displayOneGraph(downloadWeekDay))
