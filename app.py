@@ -17,6 +17,9 @@ def convertHourToString(stringifiedHour):
 
     return hour + "h" + str(minutes)
 
+def substractHours(hour1, hour2):
+    return hour2 - hour1
+
 def convertHourTupleToString(stringifiedHourTuple):
     return convertHourToString(str(stringifiedHourTuple[0])) + " - " + convertHourToString(str(stringifiedHourTuple[1]))
 
@@ -95,8 +98,12 @@ def displayGraph(ax, data, names, title):
         ax.axvline(x = hour, color = 'black')
 
     for j, (i, event) in enumerate(zip(heights, data)):
+        workingDuration = 0
+        for segment in event:
+            workingDuration += substractHours(segment[0], segment[1])
         plot_event(ax, event, i, color=colors[j%numberOfColors])
         plt.text(6, i, names[j], color=colors[j%numberOfColors], fontsize=12, va='center', ha='center')
+        plt.text(20 , i, convertHourToString(workingDuration), color=colors[j%numberOfColors], fontsize=12, va='center', ha='center')
 
     for index in range(len(plotXTicks)-1):
         startDate = plotXTicks[index]
